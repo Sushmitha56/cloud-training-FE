@@ -2,16 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { environment } from '../../environments/environment';
 import { response } from './response';
+
 const uri = environment.uri
 @Injectable()
-export class AuthService{
+export class DashboardService{
     constructor(private _http:HttpClient){}
+    getUsers(){
+        return this._http.get<response>(uri+'/users');
 
-    register(obj:any){
-       return this._http.post(uri+'/users/register',obj)
     }
-    login(obj:any){
-        return this._http.post<response>(uri+'/users/login',obj)
-     }
-     
+    deleteUser(id:any){
+        return this._http.delete<response>(uri+'/users/'+id)
+    }
+
+
+
 }

@@ -1,0 +1,73 @@
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" *ngIf="isTable">
+                <div class="card-header">
+                    <h3 class="card-title">Tasks</h3>
+                    <button class="btn btn-sm btn-primary"
+                    (click)="isTable = !isTable; isAdd=!isAdd">Add New Task</button>
+                </div>
+                <div class="card-body">
+                    <table class="table container">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let task of tasks">
+                                <td>{{task.name}}</td>
+                                <td>{{task.description}}</td>
+                                <td>
+                                    <i class="bi bi-trash p-3" (click)="deleteTask(task._id)"></i>
+                                    <i class="bi bi-pencil" (click)="showEditForm(task)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="!tasks.length">
+                            <p class="text-center">No Tasks.Please add one!</p>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card" *ngIf="isAdd">
+                <div class="card-header">
+                    <h3 class="card-title">Add Task</h3>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="addTask()">
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" [(ngModel)]="task.name" name="Task Name" placeholder="Task Name"/>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" [(ngModel)]="task.description" name="Task Description" placeholder="Task Description"/>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="=btn btn-success btn-sm form-control">Save Task</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card" *ngIf="isEdit">
+                <div class="card-header">
+                    <h3 class="card-Title">Edit Task</h3>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="updateTask()">
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" [(ngModel)]="editTask.name" name="Task Name" placeholder="Task Name"/>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control" [(ngModel)]="editTask.description" name="Task Description" placeholder="Task Description"/>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-sm form-control">Update task</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

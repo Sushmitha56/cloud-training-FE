@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router'
 import { FormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
@@ -11,6 +11,10 @@ import { ProductListComponent } from './views/product-list/product-list.componen
 import { ProfileComponent } from './views/profile/profile.component';
 import { OrdersComponent } from './views/orders/orders.component';
 import { AuthService } from './providers/auth.service';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { DashboardService } from './providers/dashboard.service';
+import { TokenService } from './providers/token-interceptor.service';
+import { TaskComponent } from './views/task/task.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +22,9 @@ import { AuthService } from './providers/auth.service';
     RegisterComponent,
     ProductListComponent,
     ProfileComponent,
-    OrdersComponent
+    OrdersComponent,
+    DashboardComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +33,14 @@ import { AuthService } from './providers/auth.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, 
+    DashboardService,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:TokenService,
+      multi:true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
