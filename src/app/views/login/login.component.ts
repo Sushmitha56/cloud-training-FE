@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
     // console.log(this.user);
     this._authService.login(this.user).subscribe(
       (res)=>{
-        console.log(res)
         const result:any = res
         if(result.code){
           sessionStorage.setItem("authToken",result.data)

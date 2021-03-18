@@ -1,5 +1,6 @@
 <p>dashboard works!</p>
 <h1>Login successfully</h1>
+<a routerLink="/profile">change password</a>
 <table style="width:100%">
     <thead>
         <tr>
@@ -7,8 +8,7 @@
             <th>name</th>
             <th>email</th>
             <th>phone</th>
-            <th>update</th>
-            <th>delete</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -16,9 +16,11 @@
             <td>{{data._id}}</td>
             <td>{{data.name}}</td>
             <td>{{data.email}}</td>
-            <td>{{data.phone}}</td>
-            <td><button>update</button></td>
-            <td><button (click)="delete(data._id)">delete</button></td>
+            <td>{{data.phone}}</td>            
+            <td>
+                <i class="bi bi-trash p-3" (click)="delete(data._id)"></i>
+                <i class="bi bi-pencil p-3"></i>
+            </td>            
         </tr>
     </tbody>
 

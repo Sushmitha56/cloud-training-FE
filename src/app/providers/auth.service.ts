@@ -12,6 +12,23 @@ export class AuthService{
     }
     login(obj:any){
         return this._http.post<response>(uri+'/users/login',obj)
-     }
+    }
+    verifyEmail(obj:any){
+      return this._http.post<response>(uri+'/users/verify',obj)
+    }
+    changePassword(obj:any){
+      return this._http.post<response>(uri+'/users/changePassword',obj)
+    }
+    resetPassword(obj:any){
+      return this._http.post<response>(uri+'/users/resetPassword',obj)
+    }
+    logOut(){
+      return this._http.post<response>(uri+'/users/logOut',{});
+    }
+    logOutAll(){
+      return this._http.post<response>(uri+'/users/logOutAll',{});
+    }
+
+
      
 }
