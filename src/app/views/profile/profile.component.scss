@@ -9,3 +9,11 @@
 .card{
     width: 30rem;
 }
+
+input.ng-invalid.ng-touched{
+    border: red 1px solid;
+}
+button.btn-primary:disabled{
+    background-color: white;
+    color: black;
+}

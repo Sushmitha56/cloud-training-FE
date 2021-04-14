@@ -10,6 +10,14 @@ import { DashboardService } from 'src/app/providers/dashboard.service';
 export class DashboardComponent implements OnInit {
 
   userData :any = []
+  isEdit:boolean=false;
+  isTable:boolean=true;
+  editUser:any={
+    _id:'',
+    name:'',
+    email:'',
+    phone:''
+  }
 
   constructor(private _dashboardservice:DashboardService) { }
 
@@ -23,7 +31,7 @@ export class DashboardComponent implements OnInit {
         const result = response;
         if(result.code){
           this.userData = result.data
-          console.log(this.userData);
+          // console.log(this.userData);
         }
       },
       (error)=>{
@@ -47,5 +55,40 @@ export class DashboardComponent implements OnInit {
       },
       (error)=>{}
     )
+  }
+
+  showEditForm(user:any){
+    this.isEdit=!this.isEdit,
+    this.isTable=!this.isTable,
+    this.editUser={
+      _id:user._id,
+      name:user.name,
+      email:user.email,
+      phone:user.phone
+
+
+    }
+
+  }
+
+  updateUser(){
+    this._dashboardservice.updateUser(this.editUser).subscribe(
+      (res)=>{
+        const result=res;
+        console.log(result);
+        if(result.code){
+          this.getUsers()
+          this.isEdit=!this.isEdit
+          this.isTable=!this.isTable
+        }
+
+      },
+      (error)=>{
+        console.log(error,'updateUser()');
+        
+        
+      }
+    )
+
   }
 }

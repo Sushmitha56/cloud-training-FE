@@ -1,24 +1,58 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">Change Password</div>
                 <div class="card-body">
-                    <form (ngSubmit)="resetPassword()">
+                    <form (ngSubmit)="resetPassword()" #changePassword="ngForm">
                         <div class="form-group mb-3">
-                            <input type="password" class="form-control" name="oldPassword"
-                                [(ngModel)]="password.oldPassword" placeholder="Old Password" />
+                            <input type="password" 
+                                class="form-control" 
+                                name="oldPassword"
+                                [(ngModel)]="password.oldPassword" 
+                                placeholder="Old Password"
+                                required
+                                #oldPassword="ngModel"
+                            />
+                            <span class="help-block text-danger" *ngIf="oldPassword.touched && !oldPassword.valid">
+                                <small>oldPassword is required</small>
+                            </span>
                         </div>
                         <div class="form-group mb-3">
-                            <input type="password" class="form-control" name="newPassword"
-                                [(ngModel)]="password.newPassword" placeholder="New Pasword" />
+                            <input type="password"
+                                class="form-control"
+                                name="newPassword"
+                                [(ngModel)]="password.newPassword" 
+                                placeholder="New Pasword" 
+                                required
+                                #newPassword="ngModel"
+                            />
+                            <span class="help-block text-danger" *ngIf="newPassword.touched && !newPassword.valid">
+                                <small>newPassword is required</small>
+                            </span>
                         </div>
                         <div class="form-group mb-3">
-                            <button type="submit" class="btn btn-primary">Change Password</button>
+                            <button type="submit" class="btn btn-primary" [disabled]="changePassword.invalid">Change Password</button>
                         </div>
                     </form>
-                    <button class="btn btn-primary" (click)='logOut()'>LogOut</button>&nbsp;
-                    <button class="btn btn-primary" (click)="logOutAll()">LogOutAll</button>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Profile
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>Name:{{profile.name}}</li>
+                        <li>email:{{profile.email}}</li>
+                        <li>phone:{{profile.phone}}</li>
+                    </ul>
+                    <button class="btn btn-primary form-control" (click)='logOut()'>LogOut</button>&nbsp;
+                    <button class="btn btn-primary form-control" (click)="logOutAll()">LogOutAll</button>
+
                 </div>
             </div>
         </div>

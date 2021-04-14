@@ -14,6 +14,10 @@ export class DashboardService{
     deleteUser(id:any){
         return this._http.delete<response>(uri+'/users/'+id)
     }
+    updateUser(user:any){
+        return this._http.put<response>(uri+'/users/',user)
+
+    }
 
 
 

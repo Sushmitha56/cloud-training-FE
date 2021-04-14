@@ -1,27 +1,95 @@
-<p>dashboard works!</p>
-<h1>Login successfully</h1>
-<a routerLink="/profile">change password</a>
-<table style="width:100%">
-    <thead>
-        <tr>
-            <th>id</th>
-            <th>name</th>
-            <th>email</th>
-            <th>phone</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let data of userData">
-            <td>{{data._id}}</td>
-            <td>{{data.name}}</td>
-            <td>{{data.email}}</td>
-            <td>{{data.phone}}</td>            
-            <td>
-                <i class="bi bi-trash p-3" (click)="delete(data._id)"></i>
-                <i class="bi bi-pencil p-3"></i>
-            </td>            
-        </tr>
-    </tbody>
-
-</table>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card" *ngIf=isTable>
+        <div class="card-header">
+          <h6 class="card-title">Users</h6>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>email</th>
+                <th>phone</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of userData">
+                <td>{{ data._id }}</td>
+                <td>{{ data.name }}</td>
+                <td>{{ data.email }}</td>
+                <td>{{ data.phone }}</td>
+                <td>
+                  <i class="bi bi-trash p-3" (click)="delete(data._id)"></i>
+                  <i class="bi bi-pencil p-3" (click)="showEditForm(data)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card" *ngIf='isEdit'>
+        <div class="card-header">
+          <h3 class="card-title">Update User</h3>
+          <button class="btn btn-primary btn-sm"
+            (click)='isTable=!isTable;isEdit=!isEdit'
+          >Back</button>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="updateUser()" #f="ngForm">
+            <div class="form-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                name="Name"
+                placeholder="Name"
+                [(ngModel)]=editUser.name
+                required
+                #name='ngModel'
+              />
+              <span class='help-block text-danger' *ngIf='name.touched && !name.valid'>
+                  <small>name is required</small>
+              </span>
+            </div>
+            <div class="form-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                name="email"
+                placeholder="email"
+                [(ngModel)]='editUser.email'
+                required
+                #email='ngModel'
+              />
+              <span class="help-block text-danger" *ngIf='email.touched && ! email.valid'>
+                  <small>email is required</small>
+              </span>
+            </div>
+            <div class="form-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                name="phone"
+                placeholder="phone"
+                [(ngModel)]='editUser.phone'
+                required
+                #phone='ngModel'
+              />
+              <span class="help-block text-danger" *ngIf='phone.touched && !phone.valid'>
+                  <small>phone is required</small>
+              </span>
+            </div>
+            <div class="form-group">
+                <button  class='btn btn-primary form-control'
+                     type="submit" [disabled]='f.invalid'>updateUser
+                </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

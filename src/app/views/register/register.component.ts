@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
   verifyit(res:any){
     console.log("this is mine:",res.message);
     if(res.status==="success"){
-      this.router.navigate(['login']);
+      this.router.navigate(['/login']);
 
     }
     

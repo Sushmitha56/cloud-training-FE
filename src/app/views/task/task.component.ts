@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 // import { NgForm } from '@angular/forms';
 import { TaskService } from 'src/app/providers/task.service';
 
@@ -29,8 +30,7 @@ export class TaskComponent implements OnInit {
   }
 
   
-  addTask() {
-    // this.toggle();
+  addTask(taskForm:NgForm) {
     this._taskService.addTask(this.task).subscribe(
       (res) => {
         const result = res

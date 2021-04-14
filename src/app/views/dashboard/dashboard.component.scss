@@ -1,0 +1,13 @@
+.bi-trash{
+    color: red;
+}
+input.ng-invalid.ng-touched{
+    border: red 1px solid;
+    
+}
+
+button.btn-primary:disabled{
+    color: black;
+    background-color: white;
+
+}

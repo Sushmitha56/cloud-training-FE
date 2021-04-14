@@ -1,4 +1,3 @@
-<!-- <p>login works!</p> -->
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -9,17 +8,49 @@
                 <div class="card-body">
                     <form (ngSubmit)="onLogin()" #f="ngForm">
                         <div class="form-group mb-3">
-                            <input type="text" name="email" [(ngModel)]="user.email" placeholder="Email" class="form-control">
+                            <input type="text" 
+                                name="email" 
+                                required 
+                                pattern="^[a-z0-9]+@[a-z]+\.[a-z]{2,4}$"
+                                [(ngModel)]="user.email" 
+                                placeholder="Email"
+                                class="form-control"
+                                #email="ngModel"
+                            >    
+                                <span class="help-block text-danger" *ngIf="email.errors?.required && email.touched">
+                                    <small>email is required</small>
+                                </span>
+                                <span class="help-block text-danger" *ngIf="email.errors?.pattern && !email.valid">
+                                    <small>email is invalid</small>
+                                </span>
                         </div>
                         <div class="form-group mb-3">
-                            <input type="password" name="password" [(ngModel)]="user.password" placeholder="Password" class="form-control">
+                            <input type="password" 
+                                name="password" 
+                                [(ngModel)]="user.password" 
+                                placeholder="Password"
+                                class="form-control"
+                                required
+                                #password=ngModel
+                            >
+                            <span class="help-block text-danger" 
+                                *ngIf="password.touched && !password.valid">
+                                <span>password is required</span>
+                            </span>
                         </div>
                         <div class="form-group mb-3">
-                            <button type="submit" class="form-control btn btn-primary btn-sm">
+                            <button type="submit"
+                                class="form-control btn btn-primary btn-sm"
+                                [disabled]="f.invalid"
+                            >
                                 Login
                             </button>
                         </div>
-                        <a routerLink="/forgotpassword">forgot password</a>
+                        <div class="router-link">
+                            <a routerLink="/register" class="reg">Don't you have account?</a>
+                            <a routerLink="/forgotpassword" class="forgotpw">forgot password</a>
+                        </div>
+
                     </form>
                 </div>
 

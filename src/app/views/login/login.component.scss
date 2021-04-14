@@ -6,7 +6,17 @@
 .row{
     height: 100vh;
 }
-a{
-    padding-left: 70%;
+.router-link{
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+
+}
+input.ng-invalid.ng-touched{
+    border: red 1px solid;
+}
+button.btn-primary:disabled{
+    background-color: white;
+    color: black;
 
 }

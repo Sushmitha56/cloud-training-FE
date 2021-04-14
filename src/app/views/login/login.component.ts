@@ -29,7 +29,9 @@ export class LoginComponent implements OnInit {
         const result:any = res
         if(result.code){
           sessionStorage.setItem("authToken",result.data)
-          this.router.navigate(["dashboard"]);
+
+          this.router.navigate(["/dashboard"]);
+          
         }
       },
       (error)=>{

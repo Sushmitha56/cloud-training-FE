@@ -8,4 +8,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
+}
+
+button.btn-success:disabled{
+  background-color: #fff;
+  color: black;
+}
+input.ng-invalid.ng-touched {
+    border: red 1px solid;
+}
+
+input.ng-valid {
+    border: green 1px solid;
+}

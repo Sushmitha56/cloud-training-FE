@@ -16,6 +16,8 @@ import { DashboardService } from './providers/dashboard.service';
 import { TokenService } from './providers/token-interceptor.service';
 import { TaskComponent } from './views/task/task.component';
 import { ForgotpasswordComponent } from './views/forgotpassword/forgotpassword.component';
+import { HeaderComponent } from './views/header/header.component';
+import { AuthGuard } from './share/guards/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,8 @@ import { ForgotpasswordComponent } from './views/forgotpassword/forgotpassword.c
     OrdersComponent,
     DashboardComponent,
     TaskComponent,
-    ForgotpasswordComponent
+    ForgotpasswordComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -35,13 +38,15 @@ import { ForgotpasswordComponent } from './views/forgotpassword/forgotpassword.c
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, 
+  providers: [ 
     DashboardService,
+    AuthService,
     {
       provide:HTTP_INTERCEPTORS,
       useClass:TokenService,
       multi:true
     },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -8,13 +8,40 @@
                 <div class="card-body">
                     <form (ngSubmit)="register(f)" #f="ngForm">
                         <div class="form-group mb-3">
-                            <input type="text" name="name" ngModel placeholder="Name" class="form-control">
+                            <input type="text"
+                                name="name" 
+                                ngModel placeholder="Name"
+                                class="form-control"
+                                required
+                                #name='ngModel'
+                            >
+                            <span class="helper-block text-danger" *ngIf='name.touched && !name.valid' >
+                                <small>name is required</small>
+                            </span>
                         </div>
                         <div class="form-group mb-3">
-                            <input type="text" name="phone" ngModel placeholder="Phone" class="form-control">
+                            <input type="text" 
+                                name="phone" 
+                                ngModel placeholder="Phone" 
+                                class="form-control"
+                                required
+                                #phone='ngModel'
+                            >
+                            <span class="help-block" *ngIf='phone.touched && !phone.valid'>
+                                <small>phone is required</small>
+                            </span>
                         </div>
                         <div class="form-group mb-3">
-                            <input type="text" name="email" ngModel placeholder="Email" class="form-control">
+                            <input type="email" 
+                                name="email" 
+                                #email="ngModel" 
+                                ngModel placeholder="Email" 
+                                required pattern="^[a-z0-9]+@[a-z]\.[a-z]{2,4}$" 
+                                class="form-control"
+                            >
+                            <span class="help-block text-danger" *ngIf="email.errors?.pattern&& !email.touched">
+                                <small>email is invalid</small>
+                            </span>
                         </div>
                         <div class="form-group mb-3">
                             <input type="password" name="password" ngModel placeholder="Password" class="form-control">

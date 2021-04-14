@@ -29,6 +29,10 @@ export class AuthService{
       return this._http.post<response>(uri+'/users/logOutAll',{});
     }
 
+    getProfileDetails(){
+      return this._http.get<response>(uri+'/users/profile')
+    }
+
 
      
 }
